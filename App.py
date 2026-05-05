@@ -1,3 +1,4 @@
+
 import streamlit as st
 
 st.set_page_config(page_title="Personal AI Tools", layout="wide")
@@ -9,31 +10,41 @@ tab1, tab2, tab3, tab4 = st.tabs(["Text to Image", "Text to Video", "Image to Vi
 
 with tab1:
     st.subheader("🖼️ Text to Image Generator")
-    prompt_img = st.text_input("Prompt likhein:", key="img_prompt")
-    if st.button("Generate Image"):
+    prompt_img = st.text_input("Prompt likhein (Jaise: A futuristic city):", key="img_prompt")
+    if st.button("Generate Image", key="btn_img"):
         if prompt_img:
-            st.info("AI model load ho raha hai...")
-            st.image("https://via.placeholder.com/512?text=Image+Generated", caption="Generated Image")
+            st.info("AI model load ho raha hai... (Real API setup ke bina ye placeholder image dikhata hai)")
+            # Yahan actual AI integration ka code lagaya jayega
+            st.image("https://via.placeholder.com/512?text=Aapki+Image+Yahan+Aayegi", caption="Generated Image")
         else:
-            st.warning("Kripya text likhein.")
+            st.warning("Kripya text/prompt likhein.")
 
 with tab2:
     st.subheader("🎥 Text to Video")
     prompt_vid = st.text_input("Video prompt:", key="vid_prompt")
-    if st.button("Generate Video"):
+    if st.button("Generate Video", key="btn_vid"):
         if prompt_vid:
             st.info("Video processing shuru...")
-            st.video("https://www.w3schools.com/html/mov_bbb.mp4")
+            st.video("https://www.w3schools.com/html/mov_bbb.mp4") # Sample video
+        else:
+            st.warning("Kripya text/prompt likhein.")
 
 with tab3:
     st.subheader("✨ Image to Video")
     uploaded_image = st.file_uploader("Ek image upload karein", type=["jpg", "png"], key="img_to_vid")
-    if uploaded_image is not None:
-        st.success("Image mil gayi!")
+    
+    # Naya input field aur button yahan add kiya gaya hai
+    vid_prompt = st.text_input("Is image ke liye prompt likhein (Jaise: Zoom in, add motion):", key="img_vid_prompt")
+    
+    if st.button("Generate Image to Video", key="btn_img_to_vid"):
+        if uploaded_image is not None and vid_prompt:
+            st.success("Video generate ho rahi hai!")
+            st.video("https://www.w3schools.com/html/mov_bbb.mp4") # Sample video output
+        else:
+            st.warning("Kripya dono (Image aur Prompt) dein.")
 
 with tab4:
     st.subheader("📝 Auto Caption")
     uploaded_audio = st.file_uploader("Audio/Video file upload karein", type=["mp3", "wav", "mp4"], key="audio")
     if uploaded_audio is not None:
         st.success("Audio transcribe ho raha hai...")
-
